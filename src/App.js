@@ -1,22 +1,23 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import WalletConnection from './components/WalletConnection';
+import AllowanceChecker from './components/AllowanceChecker';
+import WatchList from './components/WatchList';
 
 function App() {
+  const [address, setAddress] = useState('');
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Token Tracker</h1>
+        <WalletConnection setAddress={setAddress} />
+        {address && (
+          <>
+            <AllowanceChecker address={address} />
+            <WatchList address={address} />
+          </>
+        )}
       </header>
     </div>
   );
